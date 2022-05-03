@@ -10,7 +10,7 @@ import {NativeModules} from 'react-native';
 
 const {RNRestart} = NativeModules;
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -22,16 +22,19 @@ import {
   Button,
   PermissionsAndroid,
   Platform,
+  TextInput,
 } from 'react-native';
-import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import RNFetchBlob from 'rn-fetch-blob';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+  const [branchName, setBranchName] = React.useState('');
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    padding: 16,
   };
 
   const actualDownload = url => {
@@ -41,6 +44,7 @@ const App = () => {
     const dirs = RNFetchBlob.fs.dirs;
     const newFilePath = dirs.DownloadDir + fileName;
     const newiOSPath = dirs.DocumentDir + fileName;
+
     RNFetchBlob.config({
       fileCache: true,
       appendExt: extension,
@@ -70,7 +74,9 @@ const App = () => {
         granted === PermissionsAndroid.RESULTS.GRANTED ||
         Platform.OS === 'ios'
       ) {
-        actualDownload('https://roshan-upload-demo.herokuapp.com/main.js');
+        actualDownload(
+          `https://roshan-upload-demo.herokuapp.com/${branchName}/main.js`,
+        );
       } else {
       }
     } catch (err) {
@@ -84,8 +90,17 @@ const App = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <View>
-          <Text>great new feature</Text>
+        <TextInput
+          style={{height: 45, borderWidth: 1, paddingHorizontal: 8}}
+          value={branchName}
+          autoCapitalize={'none'}
+          onChangeText={value => {
+            setBranchName(value);
+          }}
+        />
+        <View style={{marginTop: 8}}>
+          <Text>Happy New Year</Text>
+          <Text>This is from branch new-pr-main</Text>
         </View>
         <Button title="Download" onPress={downloadPdf} />
       </ScrollView>
