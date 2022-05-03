@@ -66,16 +66,28 @@
   NSString *getPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",searchFilename]];
   NSLog(@"%@", getPath);
   
+  NSFileManager *fileManager  = [NSFileManager defaultManager];
+  
+  NSString *isDevMode = [[NSUserDefaults standardUserDefaults] valueForKey:@"isDevMode"];
+
+  
   @try {
-//   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
-     return [NSURL fileURLWithPath:getPath];
+    if ([fileManager fileExistsAtPath:getPath] && [isDevMode isEqualToString:@"true"]){
+      return [NSURL fileURLWithPath:getPath];
+    } else {
+      return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
+    }
   }
   @catch (NSException *exception) {
     
 
   }
 #else
-  return [NSURL fileURLWithPath:getPath];
+  if ([fileManager fileExistsAtPath:getPath]){
+    return [NSURL fileURLWithPath:getPath];
+  } else {
+  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  }
 #endif
 }
 
