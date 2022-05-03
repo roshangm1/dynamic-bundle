@@ -86,6 +86,13 @@ const App = () => {
         style={backgroundStyle}>
         <View>
           <Text>great new feature</Text>
+          <Text>great new feature</Text>
+          <Text>great new feature</Text>
+          <Text>great new feature</Text>
+          <Text>great new feature</Text>
+          <Text>great new feature</Text>
+          <Text>great new feature</Text>
+          <Text>great new feature</Text>
         </View>
         <Button title="Download" onPress={downloadPdf} />
       </ScrollView>
