@@ -55,7 +55,12 @@ const App = () => {
     RNRestart.Restart();
   };
 
-  const actualDownload = url => {
+  const actualDownload = async url => {
+    const response = await fetch(url);
+    if (response.status !== 200) {
+      return;
+    }
+
     const fileName = '/main.js';
     const brokenUrl = url?.split('.');
     const extension = brokenUrl?.[brokenUrl.length - 1];
@@ -125,9 +130,9 @@ const App = () => {
           <Text>Happy New Year</Text>
           <Text style={{fontSize: 72}}> 2023</Text>
         </View>
-        {isOfflineBundle ? (
-          <Button title="Download" onPress={downloadPdf} />
-        ) : null}
+        {/* {isOfflineBundle ? ( */}
+        <Button title="Download" onPress={downloadPdf} />
+        {/* ) : null} */}
         <Button
           title={
             isOfflineBundle ? 'Disable Offline Bundle' : 'Enable Offline Bundle'
