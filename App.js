@@ -99,7 +99,8 @@ const App = () => {
           }}
         />
         <View style={{marginTop: 8}}>
-          <Text>Happy New Year 2023</Text>
+          <Text>Happy New Year</Text>
+          <Text style={{fontSize: 28}}> 2023</Text>
         </View>
         <Button title="Download" onPress={downloadPdf} />
       </ScrollView>
