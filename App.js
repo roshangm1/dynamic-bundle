@@ -120,11 +120,14 @@ const App = () => {
         />
         <View style={{marginTop: 8}}>
           <Text>Hello Roshan</Text>
+          <Text>Hello Roshan</Text>
 
           <Text>Happy New Year</Text>
           <Text style={{fontSize: 72}}> 2022</Text>
         </View>
-        <Button title="Download" onPress={downloadPdf} />
+        {isOfflineBundle ? (
+          <Button title="Download" onPress={downloadPdf} />
+        ) : null}
         <Button
           title={
             isOfflineBundle ? 'Disable Offline Bundle' : 'Enable Offline Bundle'
