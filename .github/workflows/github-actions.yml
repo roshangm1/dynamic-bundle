@@ -1,11 +1,11 @@
 name: Upload Bundle JS action
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Generate-Bundle:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [14.x]
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
