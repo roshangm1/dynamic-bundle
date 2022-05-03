@@ -6,27 +6,25 @@
  * @flow strict-local
  */
 
-import {NativeModules} from 'react-native';
-
-const {RNRestart} = NativeModules;
-
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
+  Button,
+  NativeModules,
+  PermissionsAndroid,
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   useColorScheme,
   View,
-  Button,
-  PermissionsAndroid,
-  Platform,
-  TextInput,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-
 import RNFetchBlob from 'rn-fetch-blob';
+
+const {RNRestart} = NativeModules;
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
