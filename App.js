@@ -39,35 +39,35 @@ const App = () => {
 
   useEffect(() => {
     const interval = setTimeout(() => {
-      actualDownload(
-        `https://roshan-upload-demo.herokuapp.com/${branchName}/main.js`,
-      );
+      downloadPdf();
       clearInterval(interval);
     }, 5000);
   }, [branchName]);
 
   const actualDownload = url => {
-    // const fileName = '/main.js';
-    // const brokenUrl = url?.split('.');
-    // const extension = brokenUrl?.[brokenUrl.length - 1];
-    // const dirs = RNFetchBlob.fs.dirs;
-    // const newFilePath = dirs.DownloadDir + fileName;
-    // const newiOSPath = dirs.DocumentDir + fileName;
+    const fileName = '/main.js';
+    const brokenUrl = url?.split('.');
+    const extension = brokenUrl?.[brokenUrl.length - 1];
+    const dirs = RNFetchBlob.fs.dirs;
+    const newFilePath = dirs.DownloadDir + fileName;
+    const newiOSPath = dirs.DocumentDir + fileName;
 
-    // RNFetchBlob.config({
-    //   fileCache: true,
-    //   appendExt: extension,
-    //   path: Platform.OS === 'ios' ? newiOSPath : newFilePath,
-    // })
-    //   .fetch('GET', encodeURI(url), {})
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   })
-    //   .finally(() => {});
+    RNFetchBlob.config({
+      fileCache: true,
+      appendExt: extension,
+      path: Platform.OS === 'ios' ? newiOSPath : newFilePath,
+    })
+      .fetch('GET', encodeURI(url), {})
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally(() => {});
+  };
 
+  const forceReload = () => {
     RNRestart.Restart();
   };
 
@@ -112,7 +112,7 @@ const App = () => {
           <Text>Happy New Year</Text>
           <Text style={{fontSize: 72}}> 2022</Text>
         </View>
-        <Button title="Force Reload" onPress={downloadPdf} />
+        <Button title="Force Reload" onPress={forceReload} />
       </ScrollView>
     </SafeAreaView>
   );
