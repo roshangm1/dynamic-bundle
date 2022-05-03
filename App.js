@@ -69,7 +69,7 @@ const App = () => {
         granted === PermissionsAndroid.RESULTS.GRANTED ||
         Platform.OS === 'ios'
       ) {
-        actualDownload('http://localhost:3000/main.js');
+        actualDownload('https://roshan-upload-demo.herokuapp.com/main.js');
       } else {
       }
     } catch (err) {
