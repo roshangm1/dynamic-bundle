@@ -6,27 +6,25 @@
  * @flow strict-local
  */
 
-import {NativeModules} from 'react-native';
-
-const {RNRestart} = NativeModules;
-
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
+  Button,
+  NativeModules,
+  PermissionsAndroid,
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   useColorScheme,
   View,
-  Button,
-  PermissionsAndroid,
-  Platform,
-  TextInput,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-
 import RNFetchBlob from 'rn-fetch-blob';
+
+const {RNRestart} = NativeModules;
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -36,13 +34,6 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     padding: 16,
   };
-
-  useEffect(() => {
-    const interval = setTimeout(() => {
-      downloadPdf();
-      clearInterval(interval);
-    }, 5000);
-  }, [branchName]);
 
   const actualDownload = url => {
     const fileName = '/main.js';
@@ -60,15 +51,12 @@ const App = () => {
       .fetch('GET', encodeURI(url), {})
       .then(res => {
         console.log(res);
+        RNRestart.Restart();
       })
       .catch(err => {
         console.log(err);
       })
       .finally(() => {});
-  };
-
-  const forceReload = () => {
-    RNRestart.Restart();
   };
 
   const downloadPdf = async () => {
@@ -112,7 +100,7 @@ const App = () => {
           <Text>Happy New Year</Text>
           <Text style={{fontSize: 72}}> 2022</Text>
         </View>
-        <Button title="Force Reload" onPress={forceReload} />
+        <Button title="Download" onPress={downloadPdf} />
       </ScrollView>
     </SafeAreaView>
   );
