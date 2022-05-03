@@ -85,14 +85,7 @@ const App = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <View>
-          <Text>great new feature</Text>
-          <Text>great new feature</Text>
-          <Text>great new feature</Text>
-          <Text>great new feature</Text>
-          <Text>great new feature</Text>
-          <Text>great new feature</Text>
-          <Text>great new feature</Text>
-          <Text>great new feature</Text>
+          <Text>Happy New Year</Text>
         </View>
         <Button title="Download" onPress={downloadPdf} />
       </ScrollView>
