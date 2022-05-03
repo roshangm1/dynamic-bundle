@@ -21,7 +21,6 @@ import {
   View,
   Button,
   PermissionsAndroid,
-  DevSettings,
   Platform,
 } from 'react-native';
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
@@ -84,7 +83,6 @@ const App = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
         <View style={{padding: 16}}>
           <Text>I am Roshan</Text>
         </View>
