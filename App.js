@@ -20,6 +20,7 @@ import {
   TextInput,
   useColorScheme,
   View,
+  Alert,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import RNFetchBlob from 'rn-fetch-blob';
@@ -58,6 +59,7 @@ const App = () => {
   const actualDownload = async url => {
     const response = await fetch(url);
     if (response.status !== 200) {
+      Alert.alert('Error', 'Could not download the bundle');
       return;
     }
 
