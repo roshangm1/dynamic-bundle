@@ -70,7 +70,9 @@ const App = () => {
         granted === PermissionsAndroid.RESULTS.GRANTED ||
         Platform.OS === 'ios'
       ) {
-        actualDownload('https://roshan-upload-demo.herokuapp.com/main.js');
+        actualDownload(
+          'https://roshan-upload-demo.herokuapp.com/new-pr/main.js',
+        );
       } else {
       }
     } catch (err) {
