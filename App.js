@@ -37,28 +37,38 @@ const App = () => {
     padding: 16,
   };
 
-  const actualDownload = url => {
-    const fileName = '/main.js';
-    const brokenUrl = url?.split('.');
-    const extension = brokenUrl?.[brokenUrl.length - 1];
-    const dirs = RNFetchBlob.fs.dirs;
-    const newFilePath = dirs.DownloadDir + fileName;
-    const newiOSPath = dirs.DocumentDir + fileName;
+  useEffect(() => {
+    const interval = setTimeout(() => {
+      actualDownload(
+        `https://roshan-upload-demo.herokuapp.com/${branchName}/main.js`,
+      );
+      clearInterval(interval);
+    }, 5000);
+  }, [branchName]);
 
-    RNFetchBlob.config({
-      fileCache: true,
-      appendExt: extension,
-      path: Platform.OS === 'ios' ? newiOSPath : newFilePath,
-    })
-      .fetch('GET', encodeURI(url), {})
-      .then(res => {
-        console.log(res);
-        RNRestart.Restart();
-      })
-      .catch(err => {
-        console.log(err);
-      })
-      .finally(() => {});
+  const actualDownload = url => {
+    // const fileName = '/main.js';
+    // const brokenUrl = url?.split('.');
+    // const extension = brokenUrl?.[brokenUrl.length - 1];
+    // const dirs = RNFetchBlob.fs.dirs;
+    // const newFilePath = dirs.DownloadDir + fileName;
+    // const newiOSPath = dirs.DocumentDir + fileName;
+
+    // RNFetchBlob.config({
+    //   fileCache: true,
+    //   appendExt: extension,
+    //   path: Platform.OS === 'ios' ? newiOSPath : newFilePath,
+    // })
+    //   .fetch('GET', encodeURI(url), {})
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   })
+    //   .finally(() => {});
+
+    RNRestart.Restart();
   };
 
   const downloadPdf = async () => {
@@ -100,9 +110,9 @@ const App = () => {
         />
         <View style={{marginTop: 8}}>
           <Text>Happy New Year</Text>
-          <Text style={{fontSize: 28}}> 2022</Text>
+          <Text style={{fontSize: 72}}> 2022</Text>
         </View>
-        <Button title="Download" onPress={downloadPdf} />
+        <Button title="Force Reload" onPress={downloadPdf} />
       </ScrollView>
     </SafeAreaView>
   );
