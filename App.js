@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Button,
   NativeModules,
@@ -23,16 +23,36 @@ import {
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import RNFetchBlob from 'rn-fetch-blob';
+import DefaultPreference from 'react-native-default-preference';
 
 const {RNRestart} = NativeModules;
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const [branchName, setBranchName] = React.useState('');
+  const [isOfflineBundle, setIsOfflineBundle] = React.useState(false);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     padding: 16,
+  };
+
+  useEffect(() => {
+    DefaultPreference.get('isDevMode').then(value => {
+      setIsOfflineBundle(value === 'true');
+    });
+  }, []);
+
+  const togleDevMode = async () => {
+    const isDevMode = await DefaultPreference.get('isDevMode');
+    if (isDevMode === 'true') {
+      DefaultPreference.set('isDevMode', 'false');
+      setIsOfflineBundle(false);
+    } else {
+      DefaultPreference.set('isDevMode', 'true');
+      setIsOfflineBundle(true);
+    }
+    RNRestart.Restart();
   };
 
   const actualDownload = url => {
@@ -60,25 +80,27 @@ const App = () => {
   };
 
   const downloadPdf = async () => {
-    try {
-      const granted =
-        Platform.OS === 'android'
-          ? await PermissionsAndroid.request(
-              'android.permission.WRITE_EXTERNAL_STORAGE',
-            )
-          : 'granted';
+    if (branchName) {
+      try {
+        const granted =
+          Platform.OS === 'android'
+            ? await PermissionsAndroid.request(
+                'android.permission.WRITE_EXTERNAL_STORAGE',
+              )
+            : 'granted';
 
-      if (
-        granted === PermissionsAndroid.RESULTS.GRANTED ||
-        Platform.OS === 'ios'
-      ) {
-        actualDownload(
-          `https://roshan-upload-demo.herokuapp.com/${branchName}/main.js`,
-        );
-      } else {
+        if (
+          granted === PermissionsAndroid.RESULTS.GRANTED ||
+          Platform.OS === 'ios'
+        ) {
+          actualDownload(
+            `https://roshan-upload-demo.herokuapp.com/${branchName}/main.js`,
+          );
+        } else {
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -97,10 +119,21 @@ const App = () => {
           }}
         />
         <View style={{marginTop: 8}}>
+          <Text>Hello Roshan</Text>
+          <Text>Hello Roshan</Text>
+
           <Text>Happy New Year</Text>
-          <Text>This is from branch new-pr</Text>
+          <Text style={{fontSize: 72}}> 2022</Text>
         </View>
-        <Button title="Download" onPress={downloadPdf} />
+        {isOfflineBundle ? (
+          <Button title="Download" onPress={downloadPdf} />
+        ) : null}
+        <Button
+          title={
+            isOfflineBundle ? 'Disable Offline Bundle' : 'Enable Offline Bundle'
+          }
+          onPress={togleDevMode}
+        />
       </ScrollView>
     </SafeAreaView>
   );
