@@ -124,11 +124,8 @@ const App = () => {
           }}
         />
         <View style={{marginTop: 8}}>
-          <Text>Hello Roshan</Text>
-          <Text>Hello Roshan</Text>
-
           <Text>Happy New Year</Text>
-          <Text style={{fontSize: 72}}> 2023</Text>
+          <Text style={{fontSize: 72}}>2023</Text>
         </View>
         {/* {isOfflineBundle ? ( */}
         <Button title="Download" onPress={downloadPdf} />
