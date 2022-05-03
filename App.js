@@ -20,7 +20,6 @@ import {
   TextInput,
   useColorScheme,
   View,
-  AsyncStorage,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import RNFetchBlob from 'rn-fetch-blob';
@@ -31,7 +30,7 @@ const {RNRestart} = NativeModules;
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const [branchName, setBranchName] = React.useState('');
-  const [isDevModeEnabled, setIsDevModeEnabled] = React.useState(false);
+  const [isOfflineBundle, setIsOfflineBundle] = React.useState(false);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -40,7 +39,7 @@ const App = () => {
 
   useEffect(() => {
     DefaultPreference.get('isDevMode').then(value => {
-      setIsDevModeEnabled(value === 'true');
+      setIsOfflineBundle(value === 'true');
     });
   }, []);
 
@@ -48,10 +47,10 @@ const App = () => {
     const isDevMode = await DefaultPreference.get('isDevMode');
     if (isDevMode === 'true') {
       DefaultPreference.set('isDevMode', 'false');
-      setIsDevModeEnabled(false);
+      setIsOfflineBundle(false);
     } else {
       DefaultPreference.set('isDevMode', 'true');
-      setIsDevModeEnabled(true);
+      setIsOfflineBundle(true);
     }
     RNRestart.Restart();
   };
@@ -121,14 +120,15 @@ const App = () => {
         />
         <View style={{marginTop: 8}}>
           <Text>Hello Roshan</Text>
-          <Text>Hello Roshan</Text>
 
           <Text>Happy New Year</Text>
           <Text style={{fontSize: 72}}> 2022</Text>
         </View>
         <Button title="Download" onPress={downloadPdf} />
         <Button
-          title={isDevModeEnabled ? 'Disable Dev Mode' : 'Enable Dev Mode'}
+          title={
+            isOfflineBundle ? 'Disable Offline Bundle' : 'Enable Offline Bundle'
+          }
           onPress={togleDevMode}
         />
       </ScrollView>
