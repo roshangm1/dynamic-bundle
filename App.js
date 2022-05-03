@@ -24,6 +24,7 @@ import {
   Platform,
 } from 'react-native';
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
+
 import RNFetchBlob from 'rn-fetch-blob';
 
 const App = () => {
@@ -83,9 +84,8 @@ const App = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <View style={{padding: 16}}>
-          <Text>I am Roshan</Text>
-          <Text>I am Roshan</Text>
+        <View>
+          <Text>great new feature</Text>
         </View>
         <Button title="Download" onPress={downloadPdf} />
       </ScrollView>
