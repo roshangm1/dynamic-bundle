@@ -20,6 +20,7 @@ import {
   TextInput,
   useColorScheme,
   View,
+  Alert,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import RNFetchBlob from 'rn-fetch-blob';
@@ -55,7 +56,13 @@ const App = () => {
     RNRestart.Restart();
   };
 
-  const actualDownload = url => {
+  const actualDownload = async url => {
+    const response = await fetch(url);
+    if (response.status !== 200) {
+      Alert.alert('Error', 'Could not download the bundle');
+      return;
+    }
+
     const fileName = '/main.js';
     const brokenUrl = url?.split('.');
     const extension = brokenUrl?.[brokenUrl.length - 1];
@@ -119,11 +126,8 @@ const App = () => {
           }}
         />
         <View style={{marginTop: 8}}>
-          <Text>Hello Roshan</Text>
-          <Text>Hello Roshan</Text>
-
           <Text>Happy New Year</Text>
-          <Text style={{fontSize: 72}}> 2022</Text>
+          <Text style={{fontSize: 72}}>2023</Text>
         </View>
         {isOfflineBundle ? (
           <Button title="Download" onPress={downloadPdf} />
