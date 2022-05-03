@@ -99,8 +99,7 @@ const App = () => {
           }}
         />
         <View style={{marginTop: 8}}>
-          <Text>Happy New Year</Text>
-          <Text>This is from branch new-pr</Text>
+          <Text>Happy New Year 2022</Text>
         </View>
         <Button title="Download" onPress={downloadPdf} />
       </ScrollView>
