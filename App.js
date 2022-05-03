@@ -86,6 +86,7 @@ const App = () => {
         style={backgroundStyle}>
         <View>
           <Text>Happy New Year</Text>
+          <Text>This is from branch `new-pr`</Text>
         </View>
         <Button title="Download" onPress={downloadPdf} />
       </ScrollView>
