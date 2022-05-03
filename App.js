@@ -10,7 +10,7 @@ import {NativeModules} from 'react-native';
 
 const {RNRestart} = NativeModules;
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -23,7 +23,7 @@ import {
   PermissionsAndroid,
   Platform,
 } from 'react-native';
-import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import RNFetchBlob from 'rn-fetch-blob';
 
@@ -88,7 +88,7 @@ const App = () => {
         style={backgroundStyle}>
         <View>
           <Text>Happy New Year</Text>
-          <Text>This is from branch `new-pr`</Text>
+          <Text>This is from branch `new-pr1`</Text>
         </View>
         <Button title="Download" onPress={downloadPdf} />
       </ScrollView>

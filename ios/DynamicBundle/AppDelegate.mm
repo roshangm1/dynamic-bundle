@@ -67,7 +67,7 @@
   NSLog(@"%@", getPath);
   
   @try {
-//   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
+  // return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
      return [NSURL fileURLWithPath:getPath];
   }
   @catch (NSException *exception) {
