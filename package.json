@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint .",
     "bundle:ios": "react-native bundle --dev false --entry-file index.js --bundle-output ios/main.js --platform ios --assets-dest ios",
-    "bundle:upload": "npm run bundle:ios && curl -F 'upload=@ios/main.js' http://localhost:3000/upload"
+    "bundle:upload": "npm run bundle:ios && curl -F 'upload=@ios/main.js' https://roshan-upload-demo.herokuapp.com/upload"
   },
   "dependencies": {
     "react": "17.0.2",

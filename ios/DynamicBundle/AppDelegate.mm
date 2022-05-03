@@ -71,11 +71,11 @@
     return [NSURL fileURLWithPath:getPath];
   }
   @catch (NSException *exception) {
-    return [NSURL URLWithString:@"http://localhost:3000/main.js"];
+    
 
   }
 #else
-  return [NSURL URLWithString:@"http://localhost:3000/main.js"];
+  return [NSURL fileURLWithPath:getPath];
 #endif
 }
 

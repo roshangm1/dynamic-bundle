@@ -6,6 +6,10 @@
  * @flow strict-local
  */
 
+import {NativeModules} from 'react-native';
+
+const {RNRestart} = NativeModules;
+
 import React from 'react';
 import {
   SafeAreaView,
@@ -17,7 +21,7 @@ import {
   View,
   Button,
   PermissionsAndroid,
-  Alert,
+  DevSettings,
   Platform,
 } from 'react-native';
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
@@ -45,7 +49,7 @@ const App = () => {
       .fetch('GET', encodeURI(url), {})
       .then(res => {
         console.log(res);
-        Alert.alert('Downloaded', 'Please re open the app');
+        RNRestart.Restart();
       })
       .catch(err => {
         console.log(err);
@@ -83,8 +87,6 @@ const App = () => {
         <Header />
         <View style={{padding: 16}}>
           <Text>I am Roshan</Text>
-          <Text>Dynamically loaded from local storage</Text>
-          <Text>Dynamically loaded from local storage</Text>
         </View>
         <Button title="Download" onPress={downloadPdf} />
       </ScrollView>
