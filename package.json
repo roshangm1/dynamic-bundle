@@ -15,7 +15,10 @@
     "react": "17.0.2",
     "react-native": "0.68.1",
     "react-native-default-preference": "^1.4.4",
-    "rn-fetch-blob": "^0.12.0"
+    "react-native-reanimated": "^2.8.0",
+    "react-native-vision-camera": "^2.13.3",
+    "rn-fetch-blob": "^0.12.0",
+    "vision-camera-code-scanner": "^0.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
