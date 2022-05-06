@@ -22,7 +22,7 @@ jobs:
       - run: yarn install
       - run: branch_name=${{github.head_ref}} yarn bundle:upload
       - name: Send QR code with direct link
-        - uses: actions/github-script@v5
+        uses: actions/github-script@v5
           with:
             github-token: ${{secrets.GITHUB_TOKEN}}
             script: |
