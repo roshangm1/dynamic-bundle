@@ -22,11 +22,23 @@ jobs:
       # - run: yarn install
       # - run: branch_name=${{github.head_ref}} yarn bundle:upload
       - name: Send QR code with direct link
-        uses: roshangm1/qr-code-commenter-action@v0.1.4
+        uses: snow-actions/qrcode@v1.0.0
         with:
-          repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          content: 'https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/main.js'
-          comment: |
-            :lock: This is a QR code for access to the preview website.
-            :iphone: Scan a code with your device.
-            {qrcode}
+          text: 'https://github.com/snow-actions/qrcode'
+          path: 'qrcode.png'
+      - name: Upload a picture
+        uses: devicons/public-upload-to-imgur@v2.2.1 # Use this for the most stable version
+        with:
+          path: ./img.png # required
+          client_id: ${{secrets.CLIENT_ID}} # required
+      - name: Comment on the PR about the result
+        uses: github-actions-up-and-running/pr-comment@v1.0.1 # you can use any action that you want. This is only an example
+        env:
+          # recall that this action returns a JSON.stringified array
+          IMG_URL: ${{ fromJSON(steps.imgur_step.outputs.imgur_urls)[0] }} # get the output of the step above using its id
+          MESSAGE: |
+            Here is the picture that was uploaded:
+            ![Image]({0}) # markdown syntax for displaying a picture
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          message: ${{format(env.MESSAGE, env.IMG_URL)}}
