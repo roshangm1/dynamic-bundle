@@ -63,7 +63,7 @@ const App = () => {
   useEffect(() => {
     if (barcodeLength > 0) {
       setIsCameraOpen(false);
-      downloadBundle(displayValue);
+      downloadBundle(displayValue, true);
     }
   }, [barcodeLength, displayValue, downloadBundle]);
 
@@ -79,7 +79,7 @@ const App = () => {
     RNRestart.Restart();
   };
 
-  const actualDownload = async url => {
+  const actualDownload = async (url, fromCamera) => {
     const response = await fetch(url);
     if (response.status !== 200) {
       Alert.alert('Error', 'Could not download the bundle');
@@ -101,8 +101,14 @@ const App = () => {
       .fetch('GET', encodeURI(url), {})
       .then(res => {
         console.log(res);
-        // alert('aayo yeta');
-        RNRestart.Restart();
+        if (!fromCamera) {
+          RNRestart.Restart();
+        } else {
+          Alert.alert(
+            'Success',
+            'Bundle downloaded successfully. Please restart manually',
+          );
+        }
       })
       .catch(err => {
         console.log(err);
@@ -110,7 +116,7 @@ const App = () => {
       .finally(() => {});
   };
 
-  const downloadBundle = React.useCallback(async url => {
+  const downloadBundle = React.useCallback(async (url, fromCamera) => {
     try {
       const granted =
         Platform.OS === 'android'
@@ -123,7 +129,7 @@ const App = () => {
         granted === PermissionsAndroid.RESULTS.GRANTED ||
         Platform.OS === 'ios'
       ) {
-        actualDownload(url);
+        actualDownload(url, fromCamera);
       } else {
       }
     } catch (err) {
