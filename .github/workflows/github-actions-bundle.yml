@@ -22,7 +22,7 @@ jobs:
       # - run: yarn install
       # - run: branch_name=${{github.head_ref}} yarn bundle:upload
       - name: Send QR code with direct link
-        uses: roshangm1/qr-code-commenter-action@v0.1.3
+        uses: roshangm1/qr-code-commenter-action@v0.1.4
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
           content: 'https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/main.js'
