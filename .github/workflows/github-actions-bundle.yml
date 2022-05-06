@@ -34,3 +34,9 @@ jobs:
               ![](https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/qrcode.png)
               `
             })
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_TITLE: Please scan the qrcode below
+          SLACK_MESSAGE: 'https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/qrcode.png'
