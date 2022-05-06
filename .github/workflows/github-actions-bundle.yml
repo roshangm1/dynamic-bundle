@@ -23,14 +23,14 @@ jobs:
       - run: branch_name=${{github.head_ref}} yarn bundle:upload
       - name: Send QR code with direct link
         uses: actions/github-script@v5
-          with:
-            github-token: ${{secrets.GITHUB_TOKEN}}
-            script: |
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `Please scan this QR code to test the changes
-                ![](https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/qrcode.png)
-                `
-              })
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `Please scan this QR code to test the changes
+              ![](https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/qrcode.png)
+              `
+            })
