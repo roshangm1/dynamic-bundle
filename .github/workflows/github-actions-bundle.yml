@@ -10,23 +10,30 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.head_ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: yarn install
-      - run: branch_name=${{github.head_ref}} yarn bundle:upload
+      # - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      # - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      # - run: echo "🔎 The name of your branch is ${{ github.head_ref }} and your repository is ${{ github.repository }}."
+      # - name: Check out repository code
+      #   uses: actions/checkout@v3
+      # - name: Use Node.js ${{ matrix.node-version }}
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+      # - run: yarn install
+      # - run: branch_name=${{github.head_ref}} yarn bundle:upload
       - name: Send QR code with direct link
-        uses: kentaro-m/qr-code-commenter-action@v0.1.2
+        uses: snow-actions/qrcode@v1.0.0
         with:
-          repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          content: 'https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/main.js'
-          comment: |
-            :lock: This is a QR code for access to the preview website.
-            :iphone: Scan a code with your device.
-            {qrcode}
+          text: 'https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/main.js'
+          path: qrcode.png
+      - name: Upload the QR Code
+        uses: actions/upload-artifact@v1
+        with:
+          name: Build PR
+          path: qrcode.png
+      - name: Add a comment
+        uses: machine-learning-apps/pr-comment@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path: qrcode.png
