@@ -30,7 +30,6 @@ const {RNRestart} = NativeModules;
 
 const App = () => {
   const [branchName, setBranchName] = React.useState('');
-  const [buildUrl, setBuildUrl] = React.useState('');
   const [isOfflineBundle, setIsOfflineBundle] = React.useState(false);
   const [isCameraOpen, setIsCameraOpen] = React.useState(false);
   const devices = useCameraDevices();
@@ -40,7 +39,6 @@ const App = () => {
     checkInverted: true,
   });
 
-  console.log(barcodes);
   const backgroundStyle = {
     flex: 1,
     backgroundColor: Colors.lighter,
@@ -53,12 +51,6 @@ const App = () => {
     });
   }, []);
 
-  useEffect(() => {
-    setBuildUrl(
-      `https://roshan-upload-demo.herokuapp.com/${branchName}/main.js`,
-    );
-  }, [branchName]);
-
   React.useEffect(() => {
     (async () => {
       const status = await Camera.requestCameraPermission();
@@ -69,11 +61,11 @@ const App = () => {
   const displayValue = barcodes?.[0]?.displayValue;
 
   useEffect(() => {
-    if (barcodeLength) {
+    if (barcodeLength > 0) {
       setIsCameraOpen(false);
+      downloadBundle(displayValue);
     }
-    downloadPdf(displayValue);
-  }, [barcodeLength, displayValue, downloadPdf]);
+  }, [barcodeLength, displayValue, downloadBundle]);
 
   const togleDevMode = async () => {
     const isDevMode = await DefaultPreference.get('isDevMode');
@@ -109,6 +101,7 @@ const App = () => {
       .fetch('GET', encodeURI(url), {})
       .then(res => {
         console.log(res);
+        // alert('aayo yeta');
         RNRestart.Restart();
       })
       .catch(err => {
@@ -117,31 +110,26 @@ const App = () => {
       .finally(() => {});
   };
 
-  const downloadPdf = React.useCallback(
-    async url => {
-      if (branchName) {
-        try {
-          const granted =
-            Platform.OS === 'android'
-              ? await PermissionsAndroid.request(
-                  'android.permission.WRITE_EXTERNAL_STORAGE',
-                )
-              : 'granted';
+  const downloadBundle = React.useCallback(async url => {
+    try {
+      const granted =
+        Platform.OS === 'android'
+          ? await PermissionsAndroid.request(
+              'android.permission.WRITE_EXTERNAL_STORAGE',
+            )
+          : 'granted';
 
-          if (
-            granted === PermissionsAndroid.RESULTS.GRANTED ||
-            Platform.OS === 'ios'
-          ) {
-            actualDownload(url);
-          } else {
-          }
-        } catch (err) {
-          console.log(err);
-        }
+      if (
+        granted === PermissionsAndroid.RESULTS.GRANTED ||
+        Platform.OS === 'ios'
+      ) {
+        actualDownload(url);
+      } else {
       }
-    },
-    [branchName],
-  );
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   const openCamera = () => {
     setIsCameraOpen(prevState => !prevState);
@@ -176,7 +164,14 @@ const App = () => {
               <Text>Testing new stuff</Text>
             </View>
             {isOfflineBundle ? (
-              <Button title="Download" onPress={() => downloadPdf(buildUrl)} />
+              <Button
+                title="Download"
+                onPress={() =>
+                  downloadBundle(
+                    `https://roshan-upload-demo.herokuapp.com/${branchName}/main.js`,
+                  )
+                }
+              />
             ) : null}
             <Button
               title={
