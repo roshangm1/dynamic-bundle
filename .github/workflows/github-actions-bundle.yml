@@ -34,7 +34,6 @@ jobs:
       - name: Comment on the PR about the result
         uses: github-actions-up-and-running/pr-comment@v1.0.1 # you can use any action that you want. This is only an example
         env:
-          # recall that this action returns a JSON.stringified array
           IMG_URL: ${{ fromJSON(steps.imgur_step.outputs.imgur_urls)[0] }} # get the output of the step above using its id
           MESSAGE: |
             Here is the picture that was uploaded:
