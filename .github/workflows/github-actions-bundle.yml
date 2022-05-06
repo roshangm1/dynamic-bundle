@@ -22,18 +22,11 @@ jobs:
       # - run: yarn install
       # - run: branch_name=${{github.head_ref}} yarn bundle:upload
       - name: Send QR code with direct link
-        uses: snow-actions/qrcode@v1.0.0
+        uses: roshangm1/qr-code-commenter-action@v0.1.3
         with:
-          text: 'https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/main.js'
-          path: qrcode.png
-      - name: Upload the QR Code
-        uses: actions/upload-artifact@v1
-        with:
-          name: Build PR
-          path: qrcode.png
-      - name: Add a comment
-        uses: machine-learning-apps/pr-comment@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          path: qrcode.png
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          content: 'https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/main.js'
+          comment: |
+            :lock: This is a QR code for access to the preview website.
+            :iphone: Scan a code with your device.
+            {qrcode}
