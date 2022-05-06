@@ -174,7 +174,6 @@ const App = () => {
             />
             <View style={{marginTop: 8}}>
               <Text>Testing new stuff</Text>
-              <Text>Testing new stuff</Text>
             </View>
             {isOfflineBundle ? (
               <Button title="Download" onPress={() => downloadPdf(buildUrl)} />
