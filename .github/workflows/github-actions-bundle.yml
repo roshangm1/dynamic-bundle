@@ -10,34 +10,27 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-      # - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      # - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      # - run: echo "🔎 The name of your branch is ${{ github.head_ref }} and your repository is ${{ github.repository }}."
-      # - name: Check out repository code
-      #   uses: actions/checkout@v3
-      # - name: Use Node.js ${{ matrix.node-version }}
-      #   uses: actions/setup-node@v1
-      #   with:
-      #     node-version: ${{ matrix.node-version }}
-      # - run: yarn install
-      # - run: branch_name=${{github.head_ref}} yarn bundle:upload
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.head_ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install
+      - run: branch_name=${{github.head_ref}} yarn bundle:upload
       - name: Send QR code with direct link
-        uses: snow-actions/qrcode@v1.0.0
-        with:
-          text: 'https://github.com/snow-actions/qrcode'
-          path: 'qrcode.png'
-      - name: Upload a picture
-        uses: devicons/public-upload-to-imgur@v2.2.1 # Use this for the most stable version
-        with:
-          path: ./img.png # required
-          client_id: ${{secrets.CLIENT_ID}} # required
-      - name: Comment on the PR about the result
-        uses: github-actions-up-and-running/pr-comment@v1.0.1 # you can use any action that you want. This is only an example
-        env:
-          IMG_URL: ${{ fromJSON(steps.imgur_step.outputs.imgur_urls)[0] }} # get the output of the step above using its id
-          MESSAGE: |
-            Here is the picture that was uploaded:
-            ![Image]({0}) # markdown syntax for displaying a picture
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message: ${{format(env.MESSAGE, env.IMG_URL)}}
+        - uses: actions/github-script@v5
+          with:
+            github-token: ${{secrets.GITHUB_TOKEN}}
+            script: |
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `Please scan this QR code to test the changes
+                ![](https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/qrcode.png)
+                `
+              })

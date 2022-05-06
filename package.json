@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint .",
     "bundle:ios": "react-native bundle --dev false --entry-file index.js --bundle-output ios/main.js --platform ios --assets-dest ios",
-    "bundle:upload": "yarn bundle:ios && sh ./scripts/upload_bundle.sh ${branch_name}"
+    "bundle:upload": "sh ./scripts/upload_bundle.sh ${branch_name}"
   },
   "dependencies": {
     "react": "17.0.2",
