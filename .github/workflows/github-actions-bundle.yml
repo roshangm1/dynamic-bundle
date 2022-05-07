@@ -31,7 +31,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `Please scan this QR code to test the changes
-              ![](https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/qrcode.png)
+              ![](https://a609pi.deta.dev/download/${{github.head_ref}}/qrcode.png)
               `
             })
       - name: Slack Notification
@@ -39,4 +39,4 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_TITLE: Please scan the qrcode below
-          SLACK_MESSAGE: 'https://roshan-upload-demo.herokuapp.com/${{github.head_ref}}/qrcode.png'
+          SLACK_MESSAGE: 'https://a609pi.deta.dev/download/${{github.head_ref}}/qrcode.png'

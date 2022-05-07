@@ -1,2 +1,2 @@
 #!/bin/sh
-curl -F 'upload=@ios/main.js' https://roshan-upload-demo.herokuapp.com/upload/$1
+curl -F 'upload=@ios/main.js' https://a609pi.deta.dev/upload/$1

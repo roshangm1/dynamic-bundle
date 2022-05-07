@@ -174,7 +174,7 @@ const App = () => {
                 title="Download"
                 onPress={() =>
                   downloadBundle(
-                    `https://roshan-upload-demo.herokuapp.com/${branchName}/main.js`,
+                    `https://a609pi.deta.dev/download/${branchName}/main.js`,
                   )
                 }
               />
