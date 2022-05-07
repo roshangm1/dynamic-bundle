@@ -1,9 +1,9 @@
 name: Delete files when pull request is closed
 on:
   pull_request:
+    types: [closed]
     branches:
       - main
-    types: [closed]
 jobs:
   Generate-Bundle:
     runs-on: ubuntu-latest
