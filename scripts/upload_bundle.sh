@@ -1,2 +1,5 @@
 #!/bin/sh
-curl -F 'upload=@ios/main.js' https://a609pi.deta.dev/upload/$1
+cd ios
+zip -r  artifacts.zip main.js assets
+cd ..
+curl -F 'upload=@ios/artifacts.zip' https://a609pi.deta.dev/upload/$1
