@@ -1,0 +1,38 @@
+name: Delete files when pull request is closed
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+jobs:
+  Generate-Bundle:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.head_ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Delete files api call
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://a609pi.deta.dev/delete/?files=${{github.head_ref}}/main.js&files=${{github.head_ref}}/qrcode.png'
+          method: 'DELETE'
+      - name: Notify in github after file deletions
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `QR code and JS bundle has now been deleted from the source`
+            })
