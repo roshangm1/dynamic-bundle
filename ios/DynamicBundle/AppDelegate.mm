@@ -59,7 +59,6 @@
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
-#if DEBUG
   NSString *searchFilename = @"main.js";
   NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
 
@@ -69,8 +68,7 @@
   NSFileManager *fileManager  = [NSFileManager defaultManager];
   
   NSString *isDevMode = [[NSUserDefaults standardUserDefaults] valueForKey:@"isDevMode"];
-
-  
+#if DEBUG
   @try {
     if ([fileManager fileExistsAtPath:getPath] && [isDevMode isEqualToString:@"true"]){
       return [NSURL fileURLWithPath:getPath];
@@ -81,7 +79,11 @@
   @catch (NSException *exception) {
   }
 #else
-  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+if ([fileManager fileExistsAtPath:getPath] && [isDevMode isEqualToString:@"true"]){
+      return [NSURL fileURLWithPath:getPath];
+    } else {
+      return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+    }
 #endif
 }
 
