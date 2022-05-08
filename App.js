@@ -167,7 +167,7 @@ const App = () => {
               }}
             />
             <View style={{marginTop: 8}}>
-              <Text>Testing new base url</Text>
+              <Text>New tests</Text>
             </View>
             {isOfflineBundle ? (
               <Button
