@@ -82,10 +82,14 @@ const App = () => {
   };
 
   const actualDownload = async (url, fromCamera) => {
-    const response = await fetch(url);
-    if (response.status !== 200) {
-      Alert.alert('Error', 'Could not download the bundle');
-      return;
+    try {
+      const response = await fetch(url);
+      if (response.status !== 200) {
+        Alert.alert('Error', 'Could not download the bundle');
+        return;
+      }
+    } catch (error) {
+      console.log(error);
     }
 
     const fileName = '/artifacts.zip';
@@ -102,22 +106,20 @@ const App = () => {
     })
       .fetch('GET', encodeURI(url), {})
       .then(res => {
-        console.log(res);
-        console.log('ddd', dirs.DocumentDir);
         unzip(
           res.path(),
           Platform.OS === 'ios' ? dirs.DocumentDir : dirs.DownloadDir,
         ).then(path => {
           console.log(`unzip completed at ${path}`);
+          if (!fromCamera) {
+            RNRestart.Restart();
+          } else {
+            Alert.alert(
+              'Success',
+              'Bundle downloaded successfully. Please restart manually',
+            );
+          }
         });
-        if (!fromCamera) {
-          RNRestart.Restart();
-        } else {
-          Alert.alert(
-            'Success',
-            'Bundle downloaded successfully. Please restart manually',
-          );
-        }
       })
       .catch(err => {
         console.log(err);
@@ -177,9 +179,6 @@ const App = () => {
             />
             <Header />
             <View style={{marginTop: 8}}>
-              <Text>New tests</Text>
-              <Text>New tests</Text>
-              <Text>New tests</Text>
               <Text>New tests</Text>
             </View>
             {isOfflineBundle ? (
