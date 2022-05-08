@@ -180,8 +180,6 @@ const App = () => {
             />
             <Header />
             <View style={{marginTop: 8}}>
-              <Text>Happy hour</Text>
-              <Text>Happy hour</Text>
               <Image
                 source={require('./assets/images/listinfo.png')}
                 style={{height: 200, width: 200}}
