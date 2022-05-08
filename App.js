@@ -180,6 +180,7 @@ const App = () => {
             <Header />
             <View style={{marginTop: 8}}>
               <Text>Happy hour</Text>
+              <Text>Happy hour</Text>
             </View>
             {isOfflineBundle ? (
               <Button
