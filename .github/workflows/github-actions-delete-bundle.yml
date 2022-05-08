@@ -25,3 +25,14 @@ jobs:
         with:
           url: 'https://a609pi.deta.dev/delete/?files=${{github.head_ref}}/main.js&files=${{github.head_ref}}/qrcode.png'
           method: 'DELETE'
+      - name: Notify in github after file deletions
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `QR code and JS bundle has now been deleted from the source`
+            })
