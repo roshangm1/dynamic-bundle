@@ -20,9 +20,11 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import {unzip} from 'react-native-zip-archive';
+
 import DefaultPreference from 'react-native-default-preference';
 import {Camera, useCameraDevices} from 'react-native-vision-camera';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 import RNFetchBlob from 'rn-fetch-blob';
 import {BarcodeFormat, useScanBarcodes} from 'vision-camera-code-scanner';
 
@@ -80,13 +82,17 @@ const App = () => {
   };
 
   const actualDownload = async (url, fromCamera) => {
-    const response = await fetch(url);
-    if (response.status !== 200) {
-      Alert.alert('Error', 'Could not download the bundle');
-      return;
+    try {
+      const response = await fetch(url);
+      if (response.status !== 200) {
+        Alert.alert('Error', 'Could not download the bundle');
+        return;
+      }
+    } catch (error) {
+      console.log(error);
     }
 
-    const fileName = '/main.js';
+    const fileName = '/artifacts.zip';
     const brokenUrl = url?.split('.');
     const extension = brokenUrl?.[brokenUrl.length - 1];
     const dirs = RNFetchBlob.fs.dirs;
@@ -100,15 +106,20 @@ const App = () => {
     })
       .fetch('GET', encodeURI(url), {})
       .then(res => {
-        console.log(res);
-        if (!fromCamera) {
-          RNRestart.Restart();
-        } else {
-          Alert.alert(
-            'Success',
-            'Bundle downloaded successfully. Please restart manually',
-          );
-        }
+        unzip(
+          res.path(),
+          Platform.OS === 'ios' ? dirs.DocumentDir : dirs.DownloadDir,
+        ).then(path => {
+          console.log(`unzip completed at ${path}`);
+          if (!fromCamera) {
+            RNRestart.Restart();
+          } else {
+            Alert.alert(
+              'Success',
+              'Bundle downloaded successfully. Please restart manually',
+            );
+          }
+        });
       })
       .catch(err => {
         console.log(err);
@@ -166,6 +177,7 @@ const App = () => {
                 setBranchName(value);
               }}
             />
+            <Header />
             <View style={{marginTop: 8}}>
               <Text>New tests</Text>
             </View>
@@ -174,7 +186,7 @@ const App = () => {
                 title="Download"
                 onPress={() =>
                   downloadBundle(
-                    `https://a609pi.deta.dev/download/${branchName}/main.js`,
+                    `https://a609pi.deta.dev/download/${branchName}/artifacts.zip`,
                   )
                 }
               />

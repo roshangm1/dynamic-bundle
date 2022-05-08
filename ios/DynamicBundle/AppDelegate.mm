@@ -83,11 +83,7 @@
 
   }
 #else
-  if ([fileManager fileExistsAtPath:getPath]){
-    return [NSURL fileURLWithPath:getPath];
-  } else {
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-  }
 #endif
 }
 

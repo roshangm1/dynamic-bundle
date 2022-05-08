@@ -435,7 +435,15 @@ PODS:
     - React-RCTText
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNZipArchive (6.0.8):
+    - React-Core
+    - RNZipArchive/Core (= 6.0.8)
+    - SSZipArchive (= 2.2.3)
+  - RNZipArchive/Core (6.0.8):
+    - React-Core
+    - SSZipArchive (= 2.2.3)
   - SocketRocket (0.6.0)
+  - SSZipArchive (2.2.3)
   - vision-camera-code-scanner (0.2.0):
     - GoogleMLKit/BarcodeScanning
     - React-Core
@@ -505,6 +513,7 @@ DEPENDENCIES:
   - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - RNDefaultPreference (from `../node_modules/react-native-default-preference`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
+  - RNZipArchive (from `../node_modules/react-native-zip-archive`)
   - vision-camera-code-scanner (from `../node_modules/vision-camera-code-scanner`)
   - VisionCamera (from `../node_modules/react-native-vision-camera`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -538,6 +547,7 @@ SPEC REPOS:
     - PromisesObjC
     - Protobuf
     - SocketRocket
+    - SSZipArchive
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -607,6 +617,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-default-preference"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
+  RNZipArchive:
+    :path: "../node_modules/react-native-zip-archive"
   vision-camera-code-scanner:
     :path: "../node_modules/vision-camera-code-scanner"
   VisionCamera:
@@ -674,7 +686,9 @@ SPEC CHECKSUMS:
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNDefaultPreference: 08bdb06cfa9188d5da97d4642dac745218d7fb31
   RNReanimated: 64573e25e078ae6bec03b891586d50b9ec284393
+  RNZipArchive: 3f89b114cfeb89dac027fc5c7afd7e58d3dc4ebf
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   vision-camera-code-scanner: dda884a7f3ec8243a2a6d6489b91860648371bca
   VisionCamera: c1c171fcdbf18c438987847f785829c5638f3a4c
   Yoga: 17cd9a50243093b547c1e539c749928dd68152da
