@@ -19,6 +19,7 @@ import {
   Text,
   TextInput,
   View,
+  Image,
 } from 'react-native';
 import {unzip} from 'react-native-zip-archive';
 
@@ -181,6 +182,10 @@ const App = () => {
             <View style={{marginTop: 8}}>
               <Text>Happy hour</Text>
               <Text>Happy hour</Text>
+              <Image
+                source={require('./assets/images/listinfo.png')}
+                style={{height: 200, width: 200}}
+              />
             </View>
             {isOfflineBundle ? (
               <Button
