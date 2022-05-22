@@ -60,7 +60,7 @@
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
-    return [RNDynamicBundle setBundleUrl:@"Roshan Gautam"];
+    return [RNDynamicBundle setBundleUrl];
 
   
 // finally it should look like this but commenting it for now for development purpose

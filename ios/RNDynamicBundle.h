@@ -3,6 +3,6 @@
 @interface RNDynamicBundle : NSObject <RCTBridgeModule> {
   
 }
-+(NSURL *)setBundleUrl:(NSString*)name;
++(NSURL *)setBundleUrl;
 @end
 

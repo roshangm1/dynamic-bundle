@@ -16,6 +16,8 @@ const App = () => {
       <TopHat />
       <Text>Hello world</Text>
       <Text>Hello world</Text>
+
+      <Text>Hello world</Text>
       <View style={{marginTop: 8}}>
         <Image
           source={require('./assets/images/listinfo.png')}

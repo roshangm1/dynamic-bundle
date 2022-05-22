@@ -14,7 +14,7 @@
 
 RCT_EXPORT_MODULE(RNDynamicBundle)
 
-+(NSURL *)setBundleUrl:(NSString*)name {
++(NSURL *)setBundleUrl {
   NSString *searchFilename = @"main.js";
   NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
 
