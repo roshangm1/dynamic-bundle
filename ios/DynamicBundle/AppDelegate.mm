@@ -1,4 +1,5 @@
 #import "AppDelegate.h"
+#import "RNDynamicBundle.h"
 
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
@@ -59,32 +60,15 @@
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
-  NSString *searchFilename = @"main.js";
-  NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    return [RNDynamicBundle setBundleUrl];
 
-  NSString *getPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",searchFilename]];
-  NSLog(@"%@", getPath);
   
-  NSFileManager *fileManager  = [NSFileManager defaultManager];
-  
-  NSString *isDevMode = [[NSUserDefaults standardUserDefaults] valueForKey:@"isDevMode"];
-#if DEBUG
-  @try {
-    if ([fileManager fileExistsAtPath:getPath] && [isDevMode isEqualToString:@"true"]){
-      return [NSURL fileURLWithPath:getPath];
-    } else {
-      return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
-    }
-  }
-  @catch (NSException *exception) {
-  }
-#else
-if ([fileManager fileExistsAtPath:getPath] && [isDevMode isEqualToString:@"true"]){
-      return [NSURL fileURLWithPath:getPath];
-    } else {
-      return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-    }
-#endif
+// finally it should look like this but commenting it for now for development purpose
+//#if DEBUG
+//  return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
+//#else
+//  return [RNDynamicBundle setBundleUrl:@"Roshan Gautam"];
+//#endif
 }
 
 #if RCT_NEW_ARCH_ENABLED
