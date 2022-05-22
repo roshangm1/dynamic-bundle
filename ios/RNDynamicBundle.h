@@ -1,4 +1,6 @@
-@interface RNDynamicBundle : NSObject {
+#import <React/RCTBridgeModule.h>
+
+@interface RNDynamicBundle : NSObject <RCTBridgeModule> {
   
 }
 +(NSURL *)setBundleUrl:(NSString*)name;

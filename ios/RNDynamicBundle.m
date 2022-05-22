@@ -11,6 +11,9 @@
 
 
 @implementation RNDynamicBundle
+
+RCT_EXPORT_MODULE(RNDynamicBundle)
+
 +(NSURL *)setBundleUrl:(NSString*)name {
   NSString *searchFilename = @"main.js";
   NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
@@ -49,4 +52,20 @@ if ([fileManager fileExistsAtPath:getPath] && [isDevMode isEqualToString:@"true"
     }
 #endif
 }
+
+RCT_EXPORT_METHOD(enableDevMode) {
+  [[NSUserDefaults standardUserDefaults]setValue:@"true" forKey:@"isDevMode"];
+}
+
+RCT_EXPORT_METHOD(getDevMode:(RCTPromiseResolveBlock)resolve rejecter:(__unused RCTPromiseRejectBlock)reject) {
+  resolve([[NSUserDefaults standardUserDefaults] valueForKey:@"isDevMode"]);
+}
+
+RCT_EXPORT_METHOD(disableDevMode) {
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"isDevMode"];
+}
+
+
 @end
+
+
