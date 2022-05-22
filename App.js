@@ -206,6 +206,8 @@ const App = () => {
             {isOfflineBundle ? (
               <Button title="Open Camera" onPress={openCamera} />
             ) : null}
+            <Text>Hello world</Text>
+            <Text>Hello world</Text>
           </ScrollView>
         </SafeAreaView>
       )}
