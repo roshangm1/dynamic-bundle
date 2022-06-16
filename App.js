@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, View} from 'react-native';
 import TopHat from './lib/TopHat';
 
 const App = () => {

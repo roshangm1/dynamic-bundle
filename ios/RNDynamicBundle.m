@@ -24,7 +24,8 @@ RCT_EXPORT_MODULE(RNDynamicBundle)
   NSFileManager *fileManager  = [NSFileManager defaultManager];
   NSString *isDevMode = [[NSUserDefaults standardUserDefaults] valueForKey:@"isDevMode"];
   
-  // finally it should look like this only the production code:
+  // finally it should look like the below
+  // This should be enabled only on production mode
   // we always run from metro in case of debug mode
   
 //  if ([fileManager fileExistsAtPath:getPath] && [isDevMode isEqualToString:@"true"]){
@@ -32,7 +33,7 @@ RCT_EXPORT_MODULE(RNDynamicBundle)
 //      } else {
 //        return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 //      }
-//  
+//    
 
 #if DEBUG
   @try {
