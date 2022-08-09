@@ -406,8 +406,6 @@ PODS:
     - React-perflogger (= 0.68.1)
   - rn-fetch-blob (0.12.0):
     - React-Core
-  - RNDefaultPreference (1.4.4):
-    - React-Core
   - RNReanimated (2.8.0):
     - DoubleConversion
     - FBLazyVector
@@ -511,7 +509,6 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
-  - RNDefaultPreference (from `../node_modules/react-native-default-preference`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNZipArchive (from `../node_modules/react-native-zip-archive`)
   - vision-camera-code-scanner (from `../node_modules/vision-camera-code-scanner`)
@@ -613,8 +610,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   rn-fetch-blob:
     :path: "../node_modules/rn-fetch-blob"
-  RNDefaultPreference:
-    :path: "../node_modules/react-native-default-preference"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNZipArchive:
@@ -684,7 +679,6 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 7285b499d0339104b2813a1f58ad1ada4adbd6c0
   ReactCommon: bf2888a826ceedf54b99ad1b6182d1bc4a8a3984
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
-  RNDefaultPreference: 08bdb06cfa9188d5da97d4642dac745218d7fb31
   RNReanimated: 64573e25e078ae6bec03b891586d50b9ec284393
   RNZipArchive: 3f89b114cfeb89dac027fc5c7afd7e58d3dc4ebf
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
@@ -696,4 +690,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 42132a7925af43a2d40b06a1b4f96392e198cf52
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

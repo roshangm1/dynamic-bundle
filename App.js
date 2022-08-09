@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import {Image, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import TopHat from './lib/TopHat';
 
 const App = () => {
@@ -19,6 +19,7 @@ const App = () => {
           source={require('./assets/images/listinfo.png')}
           style={{height: 200, width: 200}}
         />
+        <Text>Hello world</Text>
       </View>
     </>
   );
