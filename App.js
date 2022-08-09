@@ -16,7 +16,7 @@ const App = () => {
     <>
       <TopHat />
       <View style={{marginTop: 8}}>
-        <Text>Hello world 123</Text>
+        <Text>Hello world</Text>
       </View>
     </>
   );
