@@ -5,8 +5,8 @@
  * @format
  * @flow strict-local
  */
-
-import React, { Text, View } from 'react-native';
+import React from 'react';
+import { Text, View } from 'react-native';
 import TopHat from './lib/TopHat';
 
 const App = () => {
