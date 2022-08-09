@@ -5,11 +5,14 @@
  * @format
  * @flow strict-local
  */
+
 import React from 'react';
 import { Text, View } from 'react-native';
 import TopHat from './lib/TopHat';
 
 const App = () => {
+
+
   return (
     <>
       <TopHat />
