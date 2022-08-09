@@ -19,7 +19,8 @@ const App = () => {
           source={require('./assets/images/listinfo.png')}
           style={{height: 200, width: 200}}
         />
-        <Text>Hello world</Text>
+        <Text>Hello world changed</Text>
+        
       </View>
     </>
   );
