@@ -5,9 +5,8 @@
  * @format
  * @flow strict-local
  */
-
 import React from 'react';
-import {Image, View} from 'react-native';
+import {Text, View} from 'react-native';
 import TopHat from './lib/TopHat';
 
 const App = () => {
@@ -15,10 +14,7 @@ const App = () => {
     <>
       <TopHat />
       <View style={{marginTop: 8}}>
-        <Image
-          source={require('./assets/images/listinfo.png')}
-          style={{height: 200, width: 200}}
-        />
+        <Text>Hello world 123</Text>
       </View>
     </>
   );
