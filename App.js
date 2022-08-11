@@ -6,17 +6,15 @@
  * @flow strict-local
  */
 import React from 'react';
-import { Text, View } from 'react-native';
+import {Text, View} from 'react-native';
 import TopHat from './lib/TopHat';
 
 const App = () => {
-
-
   return (
     <>
       <TopHat />
       <View style={{marginTop: 8}}>
-        <Text>Hello world</Text>
+        <Text>Hello world 123</Text>
       </View>
     </>
   );
